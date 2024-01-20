@@ -1,3 +1,5 @@
+language: generic
+
 sudo: required
 services:
   - docker
@@ -8,10 +10,17 @@ before_install:
 
 script:
   - docker run brs97/react-test npm test -- --coverage
+  - docker run -e CI=true brs97/react-test npm test
 
 after_success:
   - docker build -t brs97/multi-client ./client
   - docker build -t brs97/multi-nginx ./nginx
   - docker build -t brs97/multi-server ./server
   - docker build -t brs97/multi-worker ./worker
-  
+  # log in to docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # take images and push them to docker hub
+  - docker push brs97/multi-client
+  - docker push brs97/multi-nginx
+  - docker push brs97/multi-server
+  - docker push brs97/multi-worker
