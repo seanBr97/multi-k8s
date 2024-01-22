@@ -10,6 +10,18 @@ before_install:
 script:
   - docker run -e CI=true brs97/react-test npm test
 
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "multi-docker"
+  env: "Multi-docker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-339713182574"
+  bucket_path: "docker-multi"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+
 after_success:
   - docker build -t brs97/multi-client ./client
   - docker build -t brs97/multi-nginx ./nginx
