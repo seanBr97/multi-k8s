@@ -8,14 +8,16 @@ env:
     - SHA=$(git rev-parse HEAD)
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
-addons:
-  apt:
-    sources:
-      - deadsnakes # source required so it finds the package definition below
-    packages:
-      - python3.8
+# addons:
+#   apt:
+#     sources:
+#       - deadsnakes # source required so it finds the package definition below
+#     packages:
+#       - python3.8
 
 before_install:
+  - pyenv install 3.8.4
+  - pyenv global 3.8.4
   - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
   - curl https://sdk.cloud.google.com | bash > /dev/null;
   - source $HOME/google-cloud-sdk/path.bash.inc
