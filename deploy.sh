@@ -1,6 +1,6 @@
-docker build -t brs97/multi-client:latest brs97/multi-client:$SHA  -f ./client/Dockerfile ./client
-docker build -t brs97/multi-server:latest brs97/multi-server:$SHA -f ./server/Dockerfile ./server
-docker build -t brs97/multi-worker:latest brs97/multi-worker:$SHA -f ./worker/Dockerfile ./worker
+docker build -t brs97/multi-client:latest -t brs97/multi-client:$SHA  -f ./client/Dockerfile ./client
+docker build -t brs97/multi-server:latest -t brs97/multi-server:$SHA -f ./server/Dockerfile ./server
+docker build -t brs97/multi-worker:latest -t brs97/multi-worker:$SHA -f ./worker/Dockerfile ./worker
 
 docker push brs97/multi-client:latest
 docker push brs97/multi-client:$SHA
