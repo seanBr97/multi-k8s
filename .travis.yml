@@ -8,13 +8,6 @@ env:
     - SHA=$(git rev-parse HEAD)
     - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
-# addons:
-#   apt:
-#     sources:
-#       - deadsnakes # source required so it finds the package definition below
-#     packages:
-#       - python3.8
-
 before_install:
   - pyenv install 3.8.4
   - pyenv global 3.8.4
